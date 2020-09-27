@@ -1,10 +1,6 @@
-import json
-
-
-a = dict()
-
 
 class Book:
+
     def __init__(self, author, name, date, cover, about):
         self.author = author
         self.name = name
@@ -26,13 +22,14 @@ class Library:
 
 
     def add_book(self):
-        author = input('author\n')
-        name = input('name\n')
-        date = input('date\n')
-        cover = input('cover\n')
-        about = input('about\n')
-        book = Book(author, name, date, cover, about)
-        self.books_in_libary.append(book)
+
+        self.author = input('author\n')
+        self.name = input('name\n')
+        self.date = input('date\n')
+        self.cover = input('cover\n')
+        self.about = input('about\n')
+        self.book = Book(author, name, date, cover, about)
+        self.books_in_libary.append(self.book)
 
     def dell_book(self):
         pass
@@ -53,25 +50,38 @@ class Library:
             else:
                 pass
 
+    def __find_by_name(self, name_to_find: str):
+        ntf = input('Введите название')
+        for i in b:
+            if ntf.title() == i.name.title():
+                k = f'Найдены книги {i.name.title()} автор {i.author.title()} '
+                result.append(k)
+
+
+    def __find_be_year(self, ):
+
+        def __read(self):
+            pass
+
+        def __write(self):
+            pass
+
+
 
 
 class Console():
+    """
+    Данный класс определяет взаимодействие с пользователем через интерфейс коммандной строки
+    """
+    def __repr__(self):
+        print("Что необходимо сделать?")
 
     def find_book(self):
         pass
 
-
-
-class How_to_start():
-
-    # def __cover__(self):
-    #     image = Image.open(self.cover)
-    #     image.show()
-
 #
 # def set_book():
 #     pass
-
 
 
 
@@ -83,56 +93,15 @@ class How_to_start():
         make_json(a)
 
 
-# Не работает метод сортировки по алфавиту
 
-
-def make_json(a):
-    with open('data.json', 'w', encoding='utf-8') as kar:
-        json.dump(a, kar, sort_keys=False, ensure_ascii=False)
-
-
-def load_json():
-    with open('data.json', 'r+') as kar:
-        a = json.load(kar)
-        print(kar)
-        # book = Book(author, name, date, cover, about)
-
-
-def find_book(b):
-    result = list()
-    wtf = input('Введите параметр для поиска, 1 - автор, 2 - название\n')
-    if wtf == '1':
-        atf = input('Введите автора\n')
-
-    elif wtf == '2':
-        ntf = input('Введите название')
-        for i in b:
-            if ntf.title() == i.name.title():
-                k = f'Найдены книги {i.name.title()} автор {i.author.title()} '
-                result.append(k)
-            else:
-                pass
-    if len(result) == 0:
-        print('Ничего не найдено')
-    print(result)
-
-
-# set_book()
-
-# for i in range(len(b)):
-#     print(b[i].author.title())
-
-
-
-# load_json()
 
 if __name__ == '__main__':
 
-    start = input('Введите ещё одну книу 1 - Yes, 2 - NO, 3 - выолнить поиск по книгам\n')
-    if start == '1':
-        Library.add_book()
-
-    elif start == '2':
-        get_books(b)
-    elif start == '3':
-        find_book(b)
+    # start = input('Введите ещё одну книу 1 - Yes, 2 - NO, 3 - выолнить поиск по книгам\n')
+    # if start == '1':
+    #     Library.add_book()
+    #
+    # elif start == '2':
+    #     get_books(b)
+    # elif start == '3':
+    #     find_book(b)
