@@ -22,14 +22,16 @@ class Library:
 
 
     def add_book(self):
-
-        self.author = input('author\n')
-        self.name = input('name\n')
-        self.date = input('date\n')
-        self.cover = input('cover\n')
-        self.about = input('about\n')
-        self.book = Book(author, name, date, cover, about)
+        author = input('author\n')
+        name = input('name\n')
+        date = input('date\n')
+        cover = input('cover\n')
+        about = input('about\n')
+        book = Book(author, name, date, cover, about)
         self.books_in_libary.append(self.book)
+
+    def edit_book(self):
+
 
     def dell_book(self):
         pass
