@@ -23,15 +23,16 @@ class Library:
     def search(self):
         pass
 
-    def add_book(self):
 
+
+    def add_book(self):
         author = input('author\n')
         name = input('name\n')
         date = input('date\n')
         cover = input('cover\n')
         about = input('about\n')
         book = Book(author, name, date, cover, about)
-        b.append(book)
+        self.books_in_libary.append(book)
 
     def dell_book(self):
         pass
@@ -67,19 +68,19 @@ class How_to_start():
     #     image = Image.open(self.cover)
     #     image.show()
 
-
-def set_book():
-    pass
-
-
+#
+# def set_book():
+#     pass
 
 
-def get_books(b):
-    for _ in range(len(b)):
-        print(_)
-        a[b[_].author] = (b[_].name, b[_].date, b[_].cover, b[_].about)
-        print([b[_].author])
-    make_json(a)
+
+
+    def get_books(b):
+        for _ in range(len(b)):
+            print(_)
+            a[b[_].author] = (b[_].name, b[_].date, b[_].cover, b[_].about)
+            print([b[_].author])
+        make_json(a)
 
 
 # Не работает метод сортировки по алфавиту
@@ -129,11 +130,9 @@ if __name__ == '__main__':
 
     start = input('Введите ещё одну книу 1 - Yes, 2 - NO, 3 - выолнить поиск по книгам\n')
     if start == '1':
-        set_book()
-        print(b)
+        Library.add_book()
+
     elif start == '2':
-        print(b)
         get_books(b)
     elif start == '3':
-        get_books(b)
         find_book(b)
