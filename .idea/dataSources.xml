@@ -7,5 +7,11 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\vetch\PycharmProjects\Library_PY200\database.db</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="database [2]" uuid="c89f1887-9f4c-4a3b-bffd-17a320d992ca">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:D:\py_projects\Library_PY200\database.db</jdbc-url>
+    </data-source>
   </component>
 </project>
