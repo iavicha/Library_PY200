@@ -1,3 +1,6 @@
+from loguru import logger
+from SQLbase import SqlBaseClass
+
 
 class Book:
 
@@ -9,17 +12,14 @@ class Book:
         self.about = about
 
 
-
 class Library:
 
     def __init__(self, books_in_library: list = None):
         # self.where_to_write = where_to_write
-        self.books_in_libary = books_in_library if not None else []
+        self.books_in_library = books_in_library if not None else []
 
     def search(self):
         pass
-
-
 
     def add_book(self):
         author = input('author\n')
@@ -28,10 +28,13 @@ class Library:
         cover = input('cover\n')
         about = input('about\n')
         book = Book(author, name, date, cover, about)
-        self.books_in_libary.append(self.book)
+        print(book.author, book.name)
+        # self.books_in_libary.append(book)
+        # print(self.books_in_libary[0].author)
+        return book
 
     def edit_book(self):
-
+        pass
 
     def dell_book(self):
         pass
@@ -39,7 +42,7 @@ class Library:
     def get_book(self):
         pass
 
-    def __find_by_author(self, author_to_find: str ):
+    def __find_by_author(self, author_to_find: str):
 
         author_to_find = author_to_find.title()
 
@@ -59,7 +62,6 @@ class Library:
                 k = f'Найдены книги {i.name.title()} автор {i.author.title()} '
                 result.append(k)
 
-
     def __find_be_year(self, ):
 
         def __read(self):
@@ -69,39 +71,24 @@ class Library:
             pass
 
 
-
-
 class Console():
     """
     Данный класс определяет взаимодействие с пользователем через интерфейс коммандной строки
     """
+
     def __repr__(self):
         print("Что необходимо сделать?")
 
     def find_book(self):
         pass
 
-#
-# def set_book():
-#     pass
-
-
-
-    def get_books(b):
-        for _ in range(len(b)):
-            print(_)
-            a[b[_].author] = (b[_].name, b[_].date, b[_].cover, b[_].about)
-            print([b[_].author])
-        make_json(a)
-
-
-
 
 if __name__ == '__main__':
+    library = Library()
 
-    # start = input('Введите ещё одну книу 1 - Yes, 2 - NO, 3 - выолнить поиск по книгам\n')
-    # if start == '1':
-    #     Library.add_book()
+    start = input('Введите ещё одну книу 1 - Yes, 2 - NO, 3 - выолнить поиск по книгам\n')
+    if start == '1':
+        library.add_book()
     #
     # elif start == '2':
     #     get_books(b)

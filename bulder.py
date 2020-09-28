@@ -1,6 +1,5 @@
-from Driver import JsoneFileDriver
+from Driver import JsonFileDriver
 from Driver import CsvFileDriver
-
 
 
 class DriverBuilder(self):
@@ -8,21 +7,23 @@ class DriverBuilder(self):
         return None
 
 
-class JsonFileBulder(self):
+class JsonFileBuilder(self):
     pass
 
 
-class CsvFileBulder(self):
+class CsvFileBuilder(self):
     pass
 
 
-class FabricBulders(self):
+class FabricBuilders(self):
     @staticmethod
     def fabric_driver():
         driver_name = input('Where you prefer save the file?')
 
         driver = {
-            'json_file': JsoneFileBulder,
-            'csv_file': CsvFileBulder
+            'json_file': JsonFileDriver,
+            'csv_file': CsvFileDriver
 
         }
+
+

@@ -6,11 +6,11 @@ class MyFilesDriver:
     def read(self):
         pass
 
-    def write(self):
+    def write(self, data):
         pass
 
 
-class JsoneFileDriver(MyFilesDriver):
+class JsonFileDriver(MyFilesDriver):
     def __init__(self, filename):
         self.filename = filename
 
@@ -27,11 +27,10 @@ class CsvFileDriver(MyFilesDriver):
     def __init__(self, filename):
         self.filename = filename
 
-    def reaf(self):
-        with open(self.filename. 'r') as file:
+    def read(self):
+        with open(self.filename, 'r') as file:
             return csv.reader(csvfile=file)
-    # Разобраться с красным подчёркиванием
+
     def write(self, data) -> None:
         with open(self.filename, 'w') as csv_file:
             csv.writer(csv_file, data)
-
