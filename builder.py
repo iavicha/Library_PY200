@@ -15,7 +15,7 @@ class JsonFileBuilder(DriverBuilder):
 
 class CsvFileBuilder(DriverBuilder):
     def build(self):
-        filename = 'csv.csv'
+        filename = input('Введите названия файла')
         return CsvFileDriver(filename)
 
 
@@ -25,8 +25,8 @@ class FabricBuilders:
         driver_name = input('Where you prefer save the file?')
 
         drivers = {
-            'json_file': JsonFileDriver,
-            'csv_file': CsvFileDriver
+            'json_file': JsonFileBuilder,
+            'csv_file': CsvFileBuilder
 
         }
 
@@ -35,5 +35,7 @@ class FabricBuilders:
 
 if __name__ == '__main__':
 
-    # driver = FabricBuilders.fabric_driver()
-    CsvFileDriver().build()
+    l = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+    driver = FabricBuilders.fabric_driver()
+    driver.write(l)

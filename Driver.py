@@ -11,8 +11,8 @@ class MyFilesDriver:
 
 
 class JsonFileDriver(MyFilesDriver):
-    def __init__(self, filename):
-        self.filename = filename
+    def __init__(self, filename: str):
+        self.filename = filename + '.json'
 
     def read(self) -> list:
         with open(self.filename, 'r') as json_file:
@@ -24,8 +24,8 @@ class JsonFileDriver(MyFilesDriver):
 
 
 class CsvFileDriver(MyFilesDriver):
-    def __init__(self, filename):
-        self.filename = filename
+    def __init__(self, filename: str):
+        self.filename = filename + 'csv'
 
     def read(self):
         with open(self.filename, 'r') as file:
@@ -33,4 +33,6 @@ class CsvFileDriver(MyFilesDriver):
 
     def write(self, data) -> None:
         with open(self.filename, 'w') as csv_file:
-            csv.writer(csv_file, data)
+            book_csv_writer = csv.writer(csv_file, delimiter=' ',
+                                         quotechar='|', quoting=csv.QUOTE_MINIMAL)
+            book_csv_writer.writerow(data)
