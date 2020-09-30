@@ -17,7 +17,7 @@ class Library:
 
     def __init__(self, books_in_library: list = None):
         # self.where_to_write = where_to_write
-        self.books_in_libary = books_in_library if not None else []
+        self.books_in_library = books_in_library if not None else []
 
     def search(self):
         pass
@@ -31,7 +31,7 @@ class Library:
         about = input('about\n')
         book = Book(author, name, date, cover, about)
         logger.debug('Добавлена книга')
-        self.books_in_libary.append(self.book)
+        self.books_in_library.append(self.book)
 
     def edit_book(self):
         pass
@@ -76,8 +76,9 @@ class Console():
     Данный класс определяет взаимодействие с пользователем через интерфейс коммандной строки
     """
 
-    def __repr__(self):
-        print("Что необходимо сделать?")
+    def hello(self):
+        print("Что необходимо сделать?\n")
+        print()
 
     def find_book(self):
         pass
