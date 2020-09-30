@@ -1,5 +1,5 @@
 from loguru import logger
-from SQLbase import SqlBaseClass
+logger.add('log.info', compression='zip', format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}")
 
 
 class Book:
@@ -10,17 +10,19 @@ class Book:
         self.date = date
         self.cover = cover
         self.about = about
+        logger.debug('Создана книга')
 
 
 class Library:
 
     def __init__(self, books_in_library: list = None):
         # self.where_to_write = where_to_write
-        self.books_in_library = books_in_library if not None else []
+        self.books_in_libary = books_in_library if not None else []
 
     def search(self):
         pass
 
+    @logger.catch(level='DEBUG')
     def add_book(self):
         author = input('author\n')
         name = input('name\n')
@@ -28,10 +30,8 @@ class Library:
         cover = input('cover\n')
         about = input('about\n')
         book = Book(author, name, date, cover, about)
-        print(book.author, book.name)
-        # self.books_in_libary.append(book)
-        # print(self.books_in_libary[0].author)
-        return book
+        logger.debug('Добавлена книга')
+        self.books_in_libary.append(self.book)
 
     def edit_book(self):
         pass
@@ -82,13 +82,23 @@ class Console():
     def find_book(self):
         pass
 
+    #
+    # def set_book():
+    #     pass
+
+    def get_books(b):
+        for _ in range(len(b)):
+            print(_)
+            a[b[_].author] = (b[_].name, b[_].date, b[_].cover, b[_].about)
+            print([b[_].author])
+        make_json(a)
+
 
 if __name__ == '__main__':
-    library = Library()
 
     start = input('Введите ещё одну книу 1 - Yes, 2 - NO, 3 - выолнить поиск по книгам\n')
     if start == '1':
-        library.add_book()
+        Library().add_book()
     #
     # elif start == '2':
     #     get_books(b)
