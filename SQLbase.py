@@ -2,7 +2,7 @@ import sqlite3
 from loguru import logger
 from main import Book
 
-logger.add('log.info', compression='zip', format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}")
+logger.add('log_sql.info', compression='zip', format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}")
 
 
 class DataBase:

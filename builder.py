@@ -1,5 +1,9 @@
 from Driver import JsonFileDriver
 from Driver import CsvFileDriver
+from loguru import logger
+from main import Book
+
+logger.add('log_builder.info', compression='zip', format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}")
 
 
 class DriverBuilder:
@@ -10,12 +14,15 @@ class DriverBuilder:
 class JsonFileBuilder(DriverBuilder):
     def build(self):
         filename = input('Введите названия файла')
+        logger.info('Вызов драйвера Json')
         return JsonFileDriver(filename)
+
 
 
 class CsvFileBuilder(DriverBuilder):
     def build(self):
         filename = input('Введите названия файла')
+        logger.info('Вызов драйвера CSV')
         return CsvFileDriver(filename)
 
 
@@ -29,13 +36,23 @@ class FabricBuilders:
             'csv_file': CsvFileBuilder
 
         }
-
+        logger.info('Вызов фабрики драйверов')
         return drivers[driver_name]().build()
 
 
-if __name__ == '__main__':
 
-    l = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+if __name__ == '__main__':
+    book = Book(author='Tolkien',
+                name='Hobbit',
+                date='1937',
+                cover='Null',
+                about='about one little man in this big world')
+
+    book1 = Book(author='Tolkien',
+                 name='Lord of the rings',
+                 date='1937',
+                 cover='Null',
+                 about='about one little man in this big world')
 
     driver = FabricBuilders.fabric_driver()
     driver.write(l)
