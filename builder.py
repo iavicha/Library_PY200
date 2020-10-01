@@ -18,7 +18,6 @@ class JsonFileBuilder(DriverBuilder):
         return JsonFileDriver(filename)
 
 
-
 class CsvFileBuilder(DriverBuilder):
     def build(self):
         filename = input('Введите названия файла')
@@ -29,7 +28,7 @@ class CsvFileBuilder(DriverBuilder):
 class FabricBuilders:
     @staticmethod
     def fabric_driver():
-        driver_name = input('Where you prefer save the file?')
+        driver_name = input('Where you prefer save the file?\n')
 
         drivers = {
             'json_file': JsonFileBuilder,
@@ -38,7 +37,6 @@ class FabricBuilders:
         }
         logger.info('Вызов фабрики драйверов')
         return drivers[driver_name]().build()
-
 
 
 if __name__ == '__main__':
@@ -54,5 +52,10 @@ if __name__ == '__main__':
                  cover='Null',
                  about='about one little man in this big world')
 
+    books = [book, book1]
+    books_to_write = {'author':[i.author for i in books], 'name': [i.name for i in books], 'date':
+                         [i.date for i in books]}
+    # print(books_to_write)
+
     driver = FabricBuilders.fabric_driver()
-    driver.write(l)
+    driver.write(books_to_write)
