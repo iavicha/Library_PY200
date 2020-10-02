@@ -1,37 +1,48 @@
 import sqlite3
 from loguru import logger
-from main import Book
 
-logger.add('log_sql.info', compression='zip', format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}")
+logger.add('log_sql.info', format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}")
 
 
 class DataBase:
     def connect(self):
         pass
 
+    def new_base(self):
+        pass
+
     def adder(self):
         pass
 
-    def finder(self):
+    def finder_by_author(self):
+        pass
+
+    def finder_by_tittle(self):
+        pass
+
+    def finder_by_year(self):
         pass
 
     def editor(self):
         pass
 
-    def new_base(self):
+    def closer(self):
         pass
 
 
 @logger.catch(level="DEBUG")
 class SqlBaseClass(DataBase):
 
-    def __init__(self, filename_base: str, books: list = None, book=None):
+    def __init__(self, filename_base: str = None, books: list = None, book=None):
         self.base = sqlite3.connect(filename_base)
-        self.filename_base = filename_base
+        if filename_base is None:
+            self.filename_base = 'database.db'
+        else:
+            self.filename_base = filename_base
         self.c = self.base.cursor()
         self.books = books
         self.book = book
-        logger.info('Выполнено подключение к базе данных')
+        logger.info(f'Выполнено подключение к базе данных {self.filename_base}')
 
     def connect(self, filename: str = None):
         self.base = sqlite3.connect(filename)
@@ -56,7 +67,7 @@ class SqlBaseClass(DataBase):
         self.base.commit()
         logger.info('Добавлена книга в базу данных')
 
-    def finder_by_author(self, search_elem=None):
+    def finder_by_author(self, search_elem : str =None):
         self.c.execute('select an_author, a_title from books where an_author=:author', {'author': search_elem})
         logger.info(f'Выведен результат поиска {search_elem}')
         return self.c.fetchone()
@@ -91,7 +102,7 @@ if __name__ == '__main__':
     logger.info(book1)
 
     books = [book, book1]
-    sql_base = SqlBaseClass('database.db',None , book)
+    sql_base = SqlBaseClass()
 
     # sql_base.connect('database.db')
     sql_base.new_base()

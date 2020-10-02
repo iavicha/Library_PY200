@@ -1,4 +1,5 @@
 from loguru import logger
+from SQLbase import SqlBaseClass
 
 logger.add('log.info', format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}")
 
@@ -33,6 +34,7 @@ class Library:
         about = input('about\n')
         book = Book(author, name, date, cover, about)
         logger.debug('Добавлена книга')
+        return book
         # self.books_in_library.append(self.book)
 
     def edit_book(self):
@@ -45,25 +47,26 @@ class Library:
         pass
 
     def __find_by_author(self, author_to_find: str):
-
-        author_to_find = author_to_find.title()
-        for book in self.books_in_library:
-            print(i)
-            if atf.title() == i.author.title():
-                k = f'Найдены {i.author.title()} книги {i.name.title()}'
-                print(k)
-                result.append(k)
-            else:
-                pass
+        # author_to_find = author_to_find.title()
+        # for book in self.books_in_library:
+        #     print(i)
+        #     if atf.title() == i.author.title():
+        #         k = f'Найдены {i.author.title()} книги {i.name.title()}'
+        #         print(k)
+        #         result.append(k)
+        #     else:
+        pass
 
     def __find_by_name(self, name_to_find: str):
-        ntf = input('Введите название')
-        for i in b:
-            if ntf.title() == i.name.title():
-                k = f'Найдены книги {i.name.title()} автор {i.author.title()} '
-                result.append(k)
+        # ntf = input('Введите название')
+        # for i in b:
+        #     if ntf.title() == i.name.title():
+        #         k = f'Найдены книги {i.name.title()} автор {i.author.title()} '
+        #         result.append(k)
+        pass
 
     def __find_be_year(self, ):
+        pass
 
         def __read(self):
             pass
@@ -87,6 +90,7 @@ class Console:
         what_to_do_start_screen = input('\n')
         if what_to_do_start_screen == '1':
             logger.debug('Запрос открытия базы')
+            Console().screen_sql()
         elif what_to_do_start_screen == '2':
             pass
         elif what_to_do_start_screen == '3':
@@ -102,7 +106,7 @@ class Console:
             exit()
 
     def screen_book(self):
-        info_screen_book = "1 - Добавить книгу\n2 - Удалить книгу\n3 - Найти книгу\n4 - Сохранить книгу\n \
+        info_screen_book = "1 - Добавить книгу\n2 - Удалить книгу\n3 - Найти книгу\n4 - Сохранить книгу в БД\n \
 5- Перейти к меню выбора\n"
         print(info_screen_book)
         logger.debug('Вызов экрана работы с книгой')
@@ -110,7 +114,7 @@ class Console:
         if what_to_do_screen_book == '1':
             logger.debug('Запрос добавить книгу')
             Library().add_book()
-            pass
+            Console().screen_book()
         elif what_to_do_screen_book == '2':
             pass
         elif what_to_do_screen_book == '3':
@@ -122,36 +126,56 @@ class Console:
             logger.debug('Вызов главного меню')
             pass
 
-
     def screen_json(self):
         info_screen_json = "1 - Создать файл Json\n2 - Открыть файл Json\n"
         print(info_screen_json)
         logger.debug("Вызов экрана работы с Json")
+        what_to_do_json = input('\n')
+        if what_to_do_json == "1":
+            pass
+        if what_to_do_json == '2':
+            pass
+        if what_to_do_json == '3':
+            pass
 
     def screen_csv(self):
         info_screen_csv = "1 - Создать файл csv\n2 - Открыть файл Json\n "
         print(info_screen_csv)
         logger.debug('Вызов экрана работы с CSV')
+        what_to_do_csv = input('\n')
+        if what_to_do_csv == '1':
+            pass
+        if what_to_do_csv == '2':
+            pass
 
     def screen_sql(self):
+        name_of_base = input('Введите имя файла для бд') + '.db'
         info_screen_sql = '1 - Создать базу данных\n2 - Открыть базу данных\n3 - Поиск в базе данных по автору\n\
 4 - Открыть в базе данных по имени\n5 - Открыть в базе данных по году\n6 - Закрыть базу данных\n'
         print(info_screen_sql)
         logger.debug('Вызов экрана работы с SQL')
+        what_to_do_sql = input('/n')
+        if what_to_do_sql == '1':
+            SqlBaseClass(name_of_base)
+            Console().screen_sql()
+        elif what_to_do_sql == '2':
+            pass
+        elif what_to_do_sql == '3':
+            search_author = input('Введите автора\n')
+            SqlBaseClass().finder_by_author(search_author)
+            Console().screen_sql()
+        elif what_to_do_sql == '4':
+            search_tittle = input('Введите название\n')
+            SqlBaseClass().finder_by_tittle(search_tittle)
+            Console().screen_sql()
+        elif what_to_do_sql == '5':
+            search_year = input('Введите год\n')
+            SqlBaseClass().finder_by_tittle(search_year)
+            Console().screen_sql()
+        elif what_to_do_sql == '6':
+            SqlBaseClass().closer()
+            Console().start_screen()
 
 
 if __name__ == '__main__':
     Console().start_screen()
-    # Console().screen_book()
-    # Console().screen_json()
-    # Console().screen_csv()
-    # Console().screen_sql()
-
-    # start = input('Введите ещё одну книу 1 - Yes, 2 - NO, 3 - выолнить поиск по книгам\n')
-    # if start == '1':
-    #     Library().add_book()
-    #
-    # elif start == '2':
-    #     get_books(b)
-    # elif start == '3':
-    #     find_book(b)
