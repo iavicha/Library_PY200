@@ -52,10 +52,11 @@ if __name__ == '__main__':
                  cover='Null',
                  about='about one little man in this big world')
 
-    books = [book, book1]
+    books = [book, book]
     books_to_write = {'author':[i.author for i in books], 'name': [i.name for i in books], 'date':
                          [i.date for i in books]}
-    # print(books_to_write)
+    print(books_to_write)
 
     driver = FabricBuilders.fabric_driver()
-    driver.write(books_to_write)
+    l = driver.read()
+    print(l)

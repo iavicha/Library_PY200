@@ -29,6 +29,7 @@ class JsonFileDriver(MyFilesDriver):
             json.dump(data, json_file, sort_keys=False, ensure_ascii=False)
             logger.info(f'Запись файла Json {self.filename}')
 
+
 @logger.catch(level='DEBUG')
 class CsvFileDriver(MyFilesDriver):
     def __init__(self, filename: str):

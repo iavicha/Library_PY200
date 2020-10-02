@@ -1,4 +1,5 @@
 from loguru import logger
+
 logger.add('log.info', compression='zip', format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}")
 
 
@@ -17,7 +18,8 @@ class Library:
 
     def __init__(self, books_in_library: list = None):
         # self.where_to_write = where_to_write
-        self.books_in_library = books_in_library if not None else []
+        # self.books_in_library = if books_in_library is not None else []
+        # logger.info({self.books_in_library})
 
     def search(self):
         pass
@@ -76,26 +78,34 @@ class Console():
     Данный класс определяет взаимодействие с пользователем через интерфейс коммандной строки
     """
 
-    def hello(self):
+    def start_screen(self):
         print("Что необходимо сделать?\n")
-        print()
+        print('1 -Открыть базу данных\n')
+        print('2 -Работа в режиме библитека-список в оперативной памяти\n')
+        print('3 -Добавть книгу \n')
+        print('4 -Работа с файламаи в формате Json')
+        print("5 -Работа с файлами в формате CSV")
+        print("6 -Работа с базой данных")
 
-    def find_book(self):
+        logger.debug('Запрос у пользователя на выбор данных')
+
+    def screen_book(self):
+        print('1 - добавить книгу')
+        print('2 - Удалить книгу')
+        print('3 - Найти книгу')
+        print("4 - Перейти к меню выбора ")
         pass
 
-    #
-    # def set_book():
-    #     pass
+    def screen_json(self):
+        pass
 
-    def get_books(b):
-        for _ in range(len(b)):
-            print(_)
-            a[b[_].author] = (b[_].name, b[_].date, b[_].cover, b[_].about)
-            print([b[_].author])
-        make_json(a)
+    def screnn_CSV(self):
+        pass
 
 
 if __name__ == '__main__':
+
+    Console().start_screen()
 
     start = input('Введите ещё одну книу 1 - Yes, 2 - NO, 3 - выолнить поиск по книгам\n')
     if start == '1':
