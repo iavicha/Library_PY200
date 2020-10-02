@@ -69,7 +69,7 @@ class SqlBaseClass(DataBase):
         self.base.commit()
         logger.info('Добавлена книга в базу данных')
 
-    def finder_by_author(self, search_elem : str =None):
+    def finder_by_author(self, search_elem: str = None):
         try:
             self.c.execute('select an_author, a_title from books where an_author=:author', {'author': search_elem})
             logger.info(f'Выведен результат поиска {search_elem}')
@@ -77,7 +77,6 @@ class SqlBaseClass(DataBase):
         except:
             logger.debug('Ничего не нашли')
             pass
-
 
     def finder_by_tittle(self, search_elem=None):
         try:
@@ -95,8 +94,6 @@ class SqlBaseClass(DataBase):
         except:
             logger.debug('Ничего не нашли')
             pass
-
-
 
     def closer(self):
         self.base.close()

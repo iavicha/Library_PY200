@@ -1,5 +1,6 @@
 from loguru import logger
 from SQLbase import SqlBaseClass
+from builder import FabricBuilders
 
 logger.add('log.info', format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}")
 
@@ -37,8 +38,14 @@ class Library:
         return book
         # self.books_in_library.append(self.book)
 
-    def edit_book(self):
-        pass
+    @logger.catch(level='DEBUG')
+    def writble_books(self):
+        book = Library().add_book()
+        books = []
+        books.append(book)
+        books_to_write = {'author': [i.author for i in books], 'name': [i.name for i in books], 'date':
+            [i.date for i in books]}
+        return books_to_write
 
     def dell_book(self):
         pass
@@ -82,9 +89,8 @@ class Console:
 
     def start_screen(self):
         info_start_screen = "Что необходимо сделать?\n1 -Работа с базой данных\n\
-2 -Работа в режиме библитека-список в оперативной памяти\n3 -Добавть книгу \n\
-4 -Работа с файламаи в формате Json\n5 -Работа с файлами в формате CSV\n\
-6 -Работа с базой данных\n"
+2 -Работа в режиме библитека-список в оперативной памяти\n3 -Добавть книгу\n\
+4 -Работа с файламаи \n"
         logger.debug('Запрос у пользователя на выбор данных')
         print(info_start_screen)
         what_to_do_start_screen = input('\n')
@@ -97,6 +103,8 @@ class Console:
             Console().screen_book()
             logger.debug('Запрос открытия меню книги')
         elif what_to_do_start_screen == '4':
+            Console().screen_files()
+            logger.debug('Запрос к файлам')
             pass
         elif what_to_do_start_screen == '5':
             pass
@@ -120,32 +128,25 @@ class Console:
         elif what_to_do_screen_book == '3':
             pass
         elif what_to_do_screen_book == '4':
+            Console().screen_files()
             pass
         elif what_to_do_screen_book == '5':
             Console().start_screen()
             logger.debug('Вызов главного меню')
             pass
 
-    def screen_json(self):
-        info_screen_json = "1 - Создать файл Json\n2 - Открыть файл Json\n"
+    def screen_files(self):
+        info_screen_json = "1 - Создать файл\n2 - Открыть файл\n"
         print(info_screen_json)
         logger.debug("Вызов экрана работы с Json")
         what_to_do_json = input('\n')
         if what_to_do_json == "1":
-            pass
+            books = Library().writble_books()
+            driver = FabricBuilders().fabric_driver()
+            driver.write(books)
         if what_to_do_json == '2':
             pass
         if what_to_do_json == '3':
-            pass
-
-    def screen_csv(self):
-        info_screen_csv = "1 - Создать файл csv\n2 - Открыть файл Json\n "
-        print(info_screen_csv)
-        logger.debug('Вызов экрана работы с CSV')
-        what_to_do_csv = input('\n')
-        if what_to_do_csv == '1':
-            pass
-        if what_to_do_csv == '2':
             pass
 
     def screen_sql_first(self):
@@ -182,7 +183,7 @@ class Console:
             Console().screen_sql(name_of_base)
         elif what_to_do_sql == '6':
             SqlBaseClass(name_of_base).closer()
-            Console().start_screen(name_of_base)
+            Console().start_screen()
 
 
 if __name__ == '__main__':

@@ -1,7 +1,7 @@
 from Driver import JsonFileDriver
 from Driver import CsvFileDriver
 from loguru import logger
-from main import Book
+
 
 logger.add('log_builder.info', compression='zip', format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}")
 

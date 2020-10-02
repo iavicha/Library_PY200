@@ -2,7 +2,7 @@ import json
 import csv
 from loguru import logger
 
-logger.add('log_driver.info', compression='zip', format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}")
+logger.add('log_driver.info', format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}")
 
 
 class MyFilesDriver:
