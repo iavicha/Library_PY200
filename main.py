@@ -167,15 +167,18 @@ class Console:
             Console().screen_sql(name_of_base)
         elif what_to_do_sql == '3':
             search_author = input('Введите автора\n')
-            SqlBaseClass(name_of_base).finder_by_author(search_author)
+            result = SqlBaseClass(name_of_base).finder_by_author(search_author)
+            print(result)
             Console().screen_sql(name_of_base)
         elif what_to_do_sql == '4':
             search_tittle = input('Введите название\n')
-            SqlBaseClass(name_of_base).finder_by_tittle(search_tittle)
+            result = SqlBaseClass(name_of_base).finder_by_tittle(search_tittle)
+            print(result)
             Console().screen_sql(name_of_base)
         elif what_to_do_sql == '5':
             search_year = input('Введите год\n')
-            SqlBaseClass().finder_by_tittle(search_year)
+            result = SqlBaseClass(name_of_base).finder_by_tittle(search_year)
+            print(result)
             Console().screen_sql(name_of_base)
         elif what_to_do_sql == '6':
             SqlBaseClass(name_of_base).closer()

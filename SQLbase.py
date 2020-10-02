@@ -73,29 +73,30 @@ class SqlBaseClass(DataBase):
         try:
             self.c.execute('select an_author, a_title from books where an_author=:author', {'author': search_elem})
             logger.info(f'Выведен результат поиска {search_elem}')
+            return self.c.fetchone()
         except:
             logger.debug('Ничего не нашли')
             pass
-        return self.c.fetchone()
+
 
     def finder_by_tittle(self, search_elem=None):
         try:
             self.c.execute('select an_author, a_title from books where a_title=:title', {'title': search_elem})
             logger.info(f'Выведен результат поиска {search_elem}')
+            return self.c.fetchone()
         except:
             logger.debug('Ничего не нашли')
-        return self.c.fetchone()
 
     def finder_by_year(self, search_elem=None):
         try:
             self.c.execute('select an_author from books where year=:year', {'year': search_elem})
-            logger.debug('Выполняем поиск')
             logger.info(f'Выведен результат поиска {search_elem}')
+            return self.c.fetchone()
         except:
             logger.debug('Ничего не нашли')
             pass
 
-        return self.c.fetchone()
+
 
     def closer(self):
         self.base.close()
