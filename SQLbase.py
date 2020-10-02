@@ -33,12 +33,12 @@ class DataBase:
 @logger.catch(level="DEBUG")
 class SqlBaseClass(DataBase):
 
-    def __init__(self, filename_base: str = None, books: list = None, book=None):
+    def __init__(self, filename_base, books: list = None, book=None):
         self.base = sqlite3.connect(filename_base)
-        if filename_base is None:
-            self.filename_base = 'database.db'
-        else:
-            self.filename_base = filename_base
+        # if filename_base is None:
+        #     self.filename_base = 'database.db'
+        # else:
+        self.filename_base = filename_base
         self.c = self.base.cursor()
         self.books = books
         self.book = book
@@ -56,6 +56,8 @@ class SqlBaseClass(DataBase):
 
     @logger.catch(level='DEBUG')
     def adder(self):
+        self.c.execute('''CREATE TABLE IF NOT EXISTS books 
+                             (a_title, an_author, year, about)''')
         if self.books is None:
             what_to_add = (self.book.name, self.book.author, self.book.date, self.book.about)
             self.c.execute("INSERT INTO books VALUES  (?, ?, ?, ?)", what_to_add)
@@ -68,18 +70,31 @@ class SqlBaseClass(DataBase):
         logger.info('Добавлена книга в базу данных')
 
     def finder_by_author(self, search_elem : str =None):
-        self.c.execute('select an_author, a_title from books where an_author=:author', {'author': search_elem})
-        logger.info(f'Выведен результат поиска {search_elem}')
+        try:
+            self.c.execute('select an_author, a_title from books where an_author=:author', {'author': search_elem})
+            logger.info(f'Выведен результат поиска {search_elem}')
+        except:
+            logger.debug('Ничего не нашли')
+            pass
         return self.c.fetchone()
 
     def finder_by_tittle(self, search_elem=None):
-        self.c.execute('select an_author, a_title from books where a_title=:title', {'title': search_elem})
-        logger.info(f'Выведен результат поиска {search_elem}')
+        try:
+            self.c.execute('select an_author, a_title from books where a_title=:title', {'title': search_elem})
+            logger.info(f'Выведен результат поиска {search_elem}')
+        except:
+            logger.debug('Ничего не нашли')
         return self.c.fetchone()
 
     def finder_by_year(self, search_elem=None):
-        self.c.execute('select an_author from books where year=:year', {'year': search_elem})
-        logger.info(f'Выведен результат поиска {search_elem}')
+        try:
+            self.c.execute('select an_author from books where year=:year', {'year': search_elem})
+            logger.debug('Выполняем поиск')
+            logger.info(f'Выведен результат поиска {search_elem}')
+        except:
+            logger.debug('Ничего не нашли')
+            pass
+
         return self.c.fetchone()
 
     def closer(self):

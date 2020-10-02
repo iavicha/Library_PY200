@@ -81,7 +81,7 @@ class Console:
     """
 
     def start_screen(self):
-        info_start_screen = "Что необходимо сделать?\n1 -Открыть базу данных\n\
+        info_start_screen = "Что необходимо сделать?\n1 -Работа с базой данных\n\
 2 -Работа в режиме библитека-список в оперативной памяти\n3 -Добавть книгу \n\
 4 -Работа с файламаи в формате Json\n5 -Работа с файлами в формате CSV\n\
 6 -Работа с базой данных\n"
@@ -90,7 +90,7 @@ class Console:
         what_to_do_start_screen = input('\n')
         if what_to_do_start_screen == '1':
             logger.debug('Запрос открытия базы')
-            Console().screen_sql()
+            Console().screen_sql_first()
         elif what_to_do_start_screen == '2':
             pass
         elif what_to_do_start_screen == '3':
@@ -148,33 +148,38 @@ class Console:
         if what_to_do_csv == '2':
             pass
 
-    def screen_sql(self):
+    def screen_sql_first(self):
         name_of_base = input('Введите имя файла для бд') + '.db'
-        info_screen_sql = '1 - Создать базу данных\n2 - Открыть базу данных\n3 - Поиск в базе данных по автору\n\
+        Console().screen_sql(name_of_base)
+
+    def screen_sql(self, name_of_base):
+        info_screen_sql = '1 - Создать базу данных \n2 - Добавить книгу В БД \n3 - Поиск в базе данных по автору\n\
 4 - Открыть в базе данных по имени\n5 - Открыть в базе данных по году\n6 - Закрыть базу данных\n'
         print(info_screen_sql)
         logger.debug('Вызов экрана работы с SQL')
         what_to_do_sql = input('/n')
         if what_to_do_sql == '1':
             SqlBaseClass(name_of_base)
-            Console().screen_sql()
+            Console().screen_sql(name_of_base)
         elif what_to_do_sql == '2':
-            pass
+            book = Library().add_book()
+            SqlBaseClass(name_of_base, None, book).adder()
+            Console().screen_sql(name_of_base)
         elif what_to_do_sql == '3':
             search_author = input('Введите автора\n')
-            SqlBaseClass().finder_by_author(search_author)
-            Console().screen_sql()
+            SqlBaseClass(name_of_base).finder_by_author(search_author)
+            Console().screen_sql(name_of_base)
         elif what_to_do_sql == '4':
             search_tittle = input('Введите название\n')
-            SqlBaseClass().finder_by_tittle(search_tittle)
-            Console().screen_sql()
+            SqlBaseClass(name_of_base).finder_by_tittle(search_tittle)
+            Console().screen_sql(name_of_base)
         elif what_to_do_sql == '5':
             search_year = input('Введите год\n')
             SqlBaseClass().finder_by_tittle(search_year)
-            Console().screen_sql()
+            Console().screen_sql(name_of_base)
         elif what_to_do_sql == '6':
-            SqlBaseClass().closer()
-            Console().start_screen()
+            SqlBaseClass(name_of_base).closer()
+            Console().start_screen(name_of_base)
 
 
 if __name__ == '__main__':
