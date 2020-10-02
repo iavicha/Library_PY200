@@ -1,6 +1,6 @@
 from loguru import logger
 
-logger.add('log.info', compression='zip', format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}")
+logger.add('log.info', format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}")
 
 
 class Book:
@@ -33,7 +33,7 @@ class Library:
         about = input('about\n')
         book = Book(author, name, date, cover, about)
         logger.debug('Добавлена книга')
-        self.books_in_library.append(self.book)
+        # self.books_in_library.append(self.book)
 
     def edit_book(self):
         pass
@@ -73,7 +73,6 @@ class Library:
 
 
 class Console:
-
     """
     Данный класс определяет взаимодействие с пользователем через интерфейс коммандной строки
     """
@@ -91,7 +90,8 @@ class Console:
         elif what_to_do_start_screen == '2':
             pass
         elif what_to_do_start_screen == '3':
-            pass
+            Console().screen_book()
+            logger.debug('Запрос открытия меню книги')
         elif what_to_do_start_screen == '4':
             pass
         elif what_to_do_start_screen == '5':
@@ -101,20 +101,32 @@ class Console:
         else:
             exit()
 
-
-
     def screen_book(self):
         info_screen_book = "1 - Добавить книгу\n2 - Удалить книгу\n3 - Найти книгу\n4 - Сохранить книгу\n \
-4 - Перейти к меню выбора\n"
+5- Перейти к меню выбора\n"
         print(info_screen_book)
         logger.debug('Вызов экрана работы с книгой')
-        pass
+        what_to_do_screen_book = input('\n')
+        if what_to_do_screen_book == '1':
+            logger.debug('Запрос добавить книгу')
+            Library().add_book()
+            pass
+        elif what_to_do_screen_book == '2':
+            pass
+        elif what_to_do_screen_book == '3':
+            pass
+        elif what_to_do_screen_book == '4':
+            pass
+        elif what_to_do_screen_book == '5':
+            Console().start_screen()
+            logger.debug('Вызов главного меню')
+            pass
+
 
     def screen_json(self):
         info_screen_json = "1 - Создать файл Json\n2 - Открыть файл Json\n"
         print(info_screen_json)
         logger.debug("Вызов экрана работы с Json")
-
 
     def screen_csv(self):
         info_screen_csv = "1 - Создать файл csv\n2 - Открыть файл Json\n "
@@ -128,10 +140,7 @@ class Console:
         logger.debug('Вызов экрана работы с SQL')
 
 
-
-
 if __name__ == '__main__':
-
     Console().start_screen()
     # Console().screen_book()
     # Console().screen_json()
